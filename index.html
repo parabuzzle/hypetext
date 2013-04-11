@@ -31,11 +31,64 @@
         <hr>
 
         <section id="main_content">
-          <h3>HypeText</h3>
+          <h1>HypeText</h1>
 
 <p>The simple dirty http client library for ruby</p>
 
 <pre><code>$ gem install hypetext
+</code></pre>
+
+<h3>Using HypeText</h3>
+
+<pre><code>require 'hypetext'
+@client = HypeText.new
+google = @client.get_by_url("http://www.google.com")
+puts google[:body]
+</code></pre>
+
+<pre><code>require 'hypetext'
+@client = HypeText.new
+post = @client.post_by_url("http://www.google.com", {:params=&gt;{"key"=&gt;"value"}})
+puts post[:response].code
+</code></pre>
+
+<h3>Get and Post methods</h3>
+
+<pre><code>@client.get_by_url("url string", {options hash})
+@client.post_by_url("url string", {parameters hash}, {options hash})
+</code></pre>
+
+<h2>Advanced HypeText</h2>
+
+<p><strong>You can pass in a default client timeout or turn off ssl cert verification</strong></p>
+
+<pre><code>@client = HypeText.new({:timeout=&gt;10, :ssl_verify=&gt;false})
+</code></pre>
+
+<p><em>(All requests will time out after 10 seconds and raise a HypeTextExecption::TimeoutError)</em></p>
+
+<p><strong>You can define a custom RootCA</strong></p>
+
+<pre><code>@client = HypeText.new({:rootCA=&gt;"/my/custom/cert.ca", :ssl_verify=&gt;true})
+</code></pre>
+
+<p><strong>You can add params to a get or post using a hash</strong></p>
+
+<pre><code>@client.get_by_url("http://example.com", {"key"=&gt;"value"})
+@client.post_by_url("http://example.com", {"key"=&gt;"value"})
+</code></pre>
+
+<p><strong>You can add custom headers (like cookies)</strong></p>
+
+<pre><code>@client.get_by_url("http://example.com", {:parameter=&gt;{"key"=&gt;"value"}, :headers=&gt;{"cookies"=&gt;"my_cookie_string"}})
+@client.get_by_url("http://example.com",{:headers=&gt;{"cookies"=&gt;"my_cookie_string"}})
+@client.post_by_url("http://example.com", {"key"=&gt;"value"}, {:headers=&gt;{"cookies"=&gt;"my_cookie_string"}})
+</code></pre>
+
+<p><strong>You can even override the client's timeout for a specific call</strong></p>
+
+<pre><code>@client.get_by_url("http://example.com", {:timeout=&gt;1})
+@client.get_by_url("http://example.com", {:parameter=&gt;{"key"=&gt;"value"}, :headers=&gt;{"cookies"=&gt;"my_cookie_string"}, :timeout=&gt;30})
 </code></pre>
         </section>
 
