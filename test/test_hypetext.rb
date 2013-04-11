@@ -3,6 +3,7 @@ class TestHypeText < Test::Unit::TestCase
   def setup
     @client = HypeText.new
     @tweaked = HypeText.new({:timeout=>10, :ssl_verify=>false})
+    @timeouts = HypeText.new({:timeout=>0.01, :ssl_verify=>false})
   end
   
   def teardown
@@ -21,6 +22,9 @@ class TestHypeText < Test::Unit::TestCase
     assert_equal google[:url], "www.google.com:80/"
     assert_equal google_redirect_follow[:url], "www.google.com:80/"
     assert google[:body].match /Lucky/i
+    assert_raise HypeTextException::TimeoutError do
+      @timeouts.get_by_url("http://www.yahoo.com/")
+    end
   end
   
   def test_post_by_url
