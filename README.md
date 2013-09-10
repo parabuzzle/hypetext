@@ -2,6 +2,7 @@
 The simple dirty http client library for ruby
 
 [![Gem Version](https://badge.fury.io/rb/hypetext.png)](http://badge.fury.io/rb/hypetext)
+[![Build Status](https://travis-ci.org/parabuzzle/hypetext.png?branch=master)](https://travis-ci.org/parabuzzle/hypetext)
 
 ```
 $ gem install hypetext
