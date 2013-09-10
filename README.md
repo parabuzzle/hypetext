@@ -1,6 +1,8 @@
 # HypeText
 The simple dirty http client library for ruby
 
+[![Gem Version](https://badge.fury.io/rb/hypetext.png)](http://badge.fury.io/rb/hypetext)
+
 ```
 $ gem install hypetext
 ```
